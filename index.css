@@ -1,0 +1,43 @@
+
+body{
+    margin: 0%;
+}
+
+
+#main-section {
+     margin-left: auto;
+     margin-right: auto;
+     width: 100%;
+     text-align: center;
+}
+
+#button-article {
+    margin-left: auto;
+    margin-right:auto;
+    width: 50%;
+    align-items: center;
+}
+
+#show-image {
+    display: block;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 20%;
+    height: 40px;
+}
+
+#show-image:hover{
+    cursor: pointer;
+}
+
+
+#text {
+    display: block;
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
