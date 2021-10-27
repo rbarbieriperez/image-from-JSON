@@ -6,7 +6,6 @@ const _SHOWIMAGEBTN_ = document.getElementById("show-image");
 const _Message_ = document.createElement("p");
 const _ImageElement_ = document.createElement("img");
 _Message_.setAttribute("id","text");
-let request = new XMLHttpRequest;
 
 
 //Functions
@@ -15,22 +14,17 @@ let request = new XMLHttpRequest;
 
 
 function getImage(){
-    request.open("GET", "https://dog.ceo/api/breeds/image/random");
-    request.send();
-    request.onload = function(){
-        if (request.status === 200){
-            AppendImage(JSONtoString(request.response));
-        }
-    }
+    ShowLoadingMessage()
+    fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(data => AppendImage(JSONtoString(data)))
+        .finally(DeleteMessage())
 }
 
 
 function JSONtoString(JSONgetted){
-    //alert(JSON.stringify(JSONgetted))
     let JSONarr = []
-    JSONarr = JSON.parse(JSONgetted);
-
-    return Object.values(JSONarr)[0]; //Returns an array with all the object's values
+    return Object.values(JSONgetted)[0]; //Returns an array with all the object's values
 }
 
 
@@ -50,16 +44,11 @@ function RemoveImage (){
     _ImageElement_.style = null;
 }
 
-const ShowImagePromise = new Promise((success,reject) => {
-    _SHOWIMAGEBTN_.addEventListener("click", () => {
-        RemoveImage();
-        getImage();
-        success();
-        ShowImagePromise
-            .then(() => ShowLoadingMessage())
-            .finally(DeleteMessage());
-            
-    })
+
+_SHOWIMAGEBTN_.addEventListener("click", () => {
+    RemoveImage();
+    getImage();
+        
 })
 
 
